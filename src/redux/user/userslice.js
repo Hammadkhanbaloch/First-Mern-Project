@@ -1,5 +1,4 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { VscLoading } from "react-icons/vsc";
 const initialState={
     currentUser:null,
     error:null,
