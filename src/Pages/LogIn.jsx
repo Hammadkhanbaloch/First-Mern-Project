@@ -54,7 +54,8 @@ export default function LogIn() {
         <Link to='/SignUp'>Sign Up</Link>
         </span>
       </div>
-      {error && <p className='text-red-500 mt-5'>{error}</p>}
+      {error && <p className='text-red-500 mt-5'>{typeof error === 'string' ? error : JSON.stringify(error)}</p>}
+
     </div>
   )
 }
