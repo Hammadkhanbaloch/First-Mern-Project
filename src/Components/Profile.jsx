@@ -67,6 +67,26 @@ export default function Profile() {
         dispatch(deleteFailure(err.message))
       }
     }
+    const handlesignout=async()=>{
+      try{
+        dispatch(deleteStart())
+        const res=await fetch('/api/auth/logout',
+        {
+          method:'GET',
+        headers:{'Content-Type':'application/json'},
+        credentials: 'include',
+        })
+        const data=await res.json()
+        if(data.success===false){
+          dispatch(deleteFailure(data.message))
+          return;
+        }
+        dispatch(deleteSuccess(data.message))
+        navigate('/login');
+      }catch(err){
+        dispatch(deleteFailure(err.message))
+      }
+    }
   return (
     <div className='p-3 max-w-lg  border rounded-lg shadow-lg my-10 mx-auto '>
         <h1 className='text-3xl text-center font-semibold  my-7'>Profile</h1>
@@ -82,7 +102,7 @@ export default function Profile() {
         </form>
         <div className='flex justify-between '>
           <span  onClick={handledelete} className='text-red-700 my-3 cursor-pointer'> Delete Account</span>
-          <span className='text-blue-700 my-3 cursor-pointer'> Sign out</span>
+          <span  onClick={handlesignout} className='text-blue-700 my-3 cursor-pointer'> Sign out</span>
         </div>
         <p className='text-center text-green-700'>{updateSuccess?"Update successfully":''}</p>
     </div>
