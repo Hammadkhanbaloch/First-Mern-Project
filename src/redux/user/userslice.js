@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { model } from "mongoose";
 const initialState={
     currentUser:null,
     error:null,
@@ -38,8 +39,18 @@ const userSlice=createSlice({
         deleteFailure:(state,action)=>{
             state.loading=false
             state.error=action.payload
+        },
+        modelStart:(state)=>{state.loading=true},
+        modelSuccess:(state,action)=>{
+            state.loading=false
+            state.currentUser=action.payload
+        },
+        modelFailure:(state,action)=>{
+            state.loading=false
+            state.error=action.payload
         }
+
 }
 })
-export const {loginStart,loginSuccess,loginFailure,logout,updateStart,updateSuccess,updateFailure,deleteStart,deleteSuccess,deleteFailure}=userSlice.actions;
+export const {loginStart,loginSuccess,loginFailure,logout,updateStart,updateSuccess,updateFailure,deleteStart,deleteSuccess,deleteFailure,modelFailure,modelStart,modelSuccess}=userSlice.actions;
 export default userSlice.reducer;
